@@ -1,3 +1,29 @@
+// const mongoose = require('mongoose')
+
+// const userSchema = new mongoose.Schema(
+//   {
+//     email: String,
+//     password: String,
+//     firstName: String,
+//     lastName: String,
+//     userName: String
+//   },
+//   {
+//     timestamps: true,
+//     toObject: {
+//       transform: (doc, ret, options) => {
+//         ret.id = ret._id
+//         delete ret._id
+//         delete ret.password
+//         delete ret.__v
+//         return ret
+//       }
+//     }
+//   }
+// )
+
+// module.exports = mongoose.model('User', userSchema)
+
 const mongoose = require('mongoose')
 
 const userSchema = new mongoose.Schema(
@@ -6,12 +32,20 @@ const userSchema = new mongoose.Schema(
     password: String,
     firstName: String,
     lastName: String,
-    userName: String
+    userName: String,
+    accounts: [
+      {
+        accountType: String,
+        accountNumber: String,
+        balance: Number,
+        balanceType: String
+      }
+    ]
   },
   {
     timestamps: true,
     toObject: {
-      transform: (doc, ret, options) => {
+      transform: (doc, ret) => {
         ret.id = ret._id
         delete ret._id
         delete ret.password

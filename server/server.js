@@ -33,6 +33,10 @@ app.get('/', (req, res, next) => {
   res.send('Hello from my Express server v2!')
 })
 
+app.get("/api", (req, res) => {
+  res.json({ message: "Hello from server!" });
+});
+
 app.listen(PORT, () => {
   console.log(`Server listening on http://localhost:${PORT}`)
 })

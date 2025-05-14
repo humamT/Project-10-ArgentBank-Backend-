@@ -39,12 +39,20 @@ module.exports.getUserProfile = async serviceData => {
       throw new Error('User not found!')
     }
 
-    return user.toObject()
+    // ✅ Convert to plain object and include account data if it exists
+    const userObject = user.toObject()
+    return {
+      firstName: userObject.firstName,
+      lastName: userObject.lastName,
+      userName: userObject.userName,
+      accounts: userObject.accounts || [] // include accounts if stored in MongoDB
+    }
   } catch (error) {
     console.error('Error in userService.js', error)
     throw new Error(error)
   }
 }
+
 
 module.exports.loginUser = async serviceData => {
   try {
